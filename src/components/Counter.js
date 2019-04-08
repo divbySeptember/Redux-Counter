@@ -2,15 +2,30 @@ import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { increment, decrement } from '../actions';
 
+
+
+
+var blockButton = {
+    display: 'flex',
+    justifycontent: 'center',
+    width: '10%',
+    margin: '5px',
+    background: 'blue',
+    color: 'white'
+}
+
 class Counter extends Component {
-    incrementIfOdd = () => {
-        // Stretch Problem: Implement an increment function that
-        // only increments if the counter value is odd
+    incrementIfOdd = (e) => {
+        e.preventDefault();
+       if (this.props.count % 2 !== 0) {
+           this.props.increment()
+       }
     };
 
-    incrementAsync = () => {
-        // Stretch Problem: Implement an increment function that
-        // increments after waiting for one second
+    incrementAsync = (e) => {
+        e.preventDefault();
+        setTimeout(() => this.props.increment(), 1000);
+        
     };
 
     render() {
@@ -26,14 +41,13 @@ class Counter extends Component {
                 <button onClick={() => this.props.decrement(this.props.count)}>
                     -
                 </button>
-                 {/* Uncomment these button tags if you got
-                around to implementing the extra credit functions */}
-                {/* <button onClick={this.incrementIfOdd}>
-                    Increment if odd
+                
+                <button onClick={this.incrementIfOdd} style={blockButton}>
+                    Increment if Odd
                 </button>
-                <button onClick={this.incrementAsync}>
+                <button onClick={this.incrementAsync} style={blockButton}>
                     Increment async
-                </button>  */}
+                </button>
             </p>
         );
     }
